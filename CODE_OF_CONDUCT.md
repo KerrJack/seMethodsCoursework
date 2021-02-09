@@ -32,14 +32,15 @@ Examples of unacceptable behavior by participants include:
  professional setting
 * Not turing up to scheduled team meetings without a valid reason
 * Not contributing to the project
+* Not contributing in meetings
+* Not completeing a task you have agreed to do
 
 ## Scope
 
 This Code of Conduct applies both within project spaces and in public spaces
 when an individual is representing the project or its community. Examples of
 representing a project or community include using an official project e-mail
-address, posting via an official social media account, or acting as an appointed
-representative at an online or offline event. Representation of a project may be
+address, or acting as an appointed representative at an online or offline event. Representation of a project may be
 further defined and clarified by project maintainers.
 
 ## Enforcement
