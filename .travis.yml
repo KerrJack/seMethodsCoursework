@@ -1,1 +1,10 @@
+sudo: required
+
 language: java
+
+services:
+  - docker
+
+after_success:
+  - docker build -t se_methods_coursework .
+  - docker run se_methods_coursework
