@@ -1,14 +1,21 @@
 package com.napier.seMethodsCoursework;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         // Create new Application
         App a = new App();
 
         // Connect to database
         a.connect();
+        // Get Employee
+        // Extract employee salary information
+        ArrayList<Country> country = a.getpoplargetosmall();
+        // Display results
+        a.printPopulations(country);
 
         // Disconnect from database
         a.disconnect();
@@ -75,6 +82,55 @@ public class App {
             {
                 System.out.println("Error closing connection to database");
             }
+        }
+    }
+    public ArrayList<Country> getpoplargetosmall()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Name, population"
+                            +"FROM country"
+                            +"ORDER BY population DESC";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract employee information
+            ArrayList<Country> country = new ArrayList<Country>();
+            while (rset.next())
+            {
+                Country cntry = new Country();
+                cntry.Name = rset.getString("Name");
+                cntry.Population = rset.getInt("population");
+
+            }
+            return country;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get salary details");
+            return null;
+        }
+    }
+    /**
+     * Prints a list of employees.
+     * @param country The list of employees to print.
+     */
+    public void printPopulations(ArrayList<Country> country)
+    {
+        // Print header
+        System.out.println(String.format("%-10s %-15s", "Name", "Population"));
+        // Loop over all employees in the list
+        for (Country cntry : country)
+        {
+            String cntry_string =
+                    String.format("%-10s %-15s",
+                            cntry.Name, cntry.Population);
+            System.out.println(cntry_string);
         }
     }
 }
