@@ -5,13 +5,13 @@ actor user as "user"
 rectangle Database
 
 rectangle "program" {
-    usecase UC4 as "Get population of countries"
+    usecase UC4 as "Get population of countries in region"
     usecase UCa as "order largest to smallest"
     usecase UCb as "print populations"
 
     user - UC4
-    UC4 ..> UCa 
-    UCa ..> UCb 
+    UC4 ..> UCa
+    UCa ..> UCb
     UC4 - Database
 }
 
