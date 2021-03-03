@@ -1,0 +1,24 @@
+@startuml
+
+actor user as "user"
+
+rectangle Database
+
+rectangle "program" {
+    usecase UC4 as "Get population of cities in country"
+    usecase UC5 as "Get population of people in country"
+    usecase UCa as "take cities from total"
+    usecase UCb as "print answer"
+    usecase UCc as "print cities population"
+
+    user - UC4
+    user - UC5
+    UC4 ..> UCa
+    UC5 ..> UCa
+    UCa ..> UCb
+    UC4 ..> UCc
+    UC4 - Database
+    UC5 - Database
+}
+
+@enduml

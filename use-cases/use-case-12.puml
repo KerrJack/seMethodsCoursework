@@ -1,0 +1,19 @@
+@startuml
+
+actor user as "user"
+
+rectangle Database
+
+rectangle "program" {
+    usecase UC4 as "Get population of cities in district"
+    usecase UCa as "order largest to smallest"
+    usecase UCc as "print cities"
+
+    user - UC4
+    UC4 ..> UCa
+    UCa ..> UCb
+    UCb ..> UCc
+    UC4 - Database
+}
+
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+
+actor user as "user"
+
+rectangle Database
+
+rectangle "program" {
+    usecase UC4 as "Get population of all continents"
+
+    usecase UCa as "add all populations"
+    usecase UCb as "print answer"
+
+
+    user - UC4
+
+    UC4 ..> UCa
+    UCa ..> UCb
+
+
+    UC4 - Database
+
+}
+
+@enduml
