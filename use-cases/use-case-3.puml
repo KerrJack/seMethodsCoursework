@@ -1,0 +1,17 @@
+@startuml
+
+actor user as "user"
+
+rectangle Database
+
+rectangle "program" {
+    usecase UC4 as "Get population"
+
+    usecase UCa as "print population"
+
+    user - UC4
+    UC4 ..> UCa : include
+    UC4 - Database
+}
+
+@enduml
