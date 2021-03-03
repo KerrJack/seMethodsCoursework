@@ -92,9 +92,7 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT Name, population"
-                            +"FROM country"
-                            +"ORDER BY population DESC";
+                    "SELECT Name, population FROM country ORDER BY population DESC";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -105,6 +103,7 @@ public class App {
                 Country cntry = new Country();
                 cntry.Name = rset.getString("Name");
                 cntry.Population = rset.getInt("population");
+                country.add(cntry);
 
             }
             return country;
@@ -123,13 +122,12 @@ public class App {
     public void printPopulations(ArrayList<Country> country)
     {
         // Print header
-        System.out.println(String.format("%-10s %-15s", "Name", "Population"));
-        // Loop over all employees in the list
+        System.out.println(String.format("%-45s %-15s", "Name", "population"));
+        // Loop over all countries in the list
         for (Country cntry : country)
         {
             String cntry_string =
-                    String.format("%-10s %-15s",
-                            cntry.Name, cntry.Population);
+                    String.format("%-45s %-15s", cntry.Name, cntry.Population);
             System.out.println(cntry_string);
         }
     }
