@@ -44,7 +44,7 @@ public class App {
         int retries = 10;
         for (int i = 0; i < retries; ++i)
         {
-            System.out.println("Connecting to database...");
+            System.out.println("Connecting to database... blah");
             try
             {
                 // Wait a bit for db to start
@@ -91,10 +91,7 @@ public class App {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
-            String strSelect =
-                    "SELECT Name, population"
-                            +"FROM country"
-                            +"ORDER BY population DESC";
+            String strSelect = "SELECT Name, Population FROM country ORDER BY population DESC";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -102,9 +99,11 @@ public class App {
             ArrayList<Country> country = new ArrayList<Country>();
             while (rset.next())
             {
+                //System.out.println("Found a country called " + rset.getString("Name"));
                 Country cntry = new Country();
                 cntry.Name = rset.getString("Name");
-                cntry.Population = rset.getInt("population");
+                cntry.Population = rset.getInt("Population");
+                country.add(cntry);
 
             }
             return country;
@@ -122,9 +121,10 @@ public class App {
      */
     public void printPopulations(ArrayList<Country> country)
     {
+        System.out.println("There are " + country.size() + " countries in total");
         // Print header
         System.out.println(String.format("%-10s %-15s", "Name", "Population"));
-        // Loop over all employees in the list
+        // Loop over all countries in the list
         for (Country cntry : country)
         {
             String cntry_string =
