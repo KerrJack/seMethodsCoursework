@@ -44,10 +44,10 @@ public class App {
         int retries = 10;
         for (int i = 0; i < retries; ++i)
         {
-            System.out.println("Connecting to database... blah");
+            System.out.println("Connecting to database...");
             try
             {
-                // Wait a bit for db to start
+                // Wait for db to start
                 Thread.sleep(30000);
                 // Connect to database
                 con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
@@ -95,11 +95,10 @@ public class App {
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract employee information
+            // Extract country information
             ArrayList<Country> country = new ArrayList<Country>();
             while (rset.next())
             {
-                //System.out.println("Found a country called " + rset.getString("Name"));
                 Country cntry = new Country();
                 cntry.Name = rset.getString("Name");
                 cntry.Population = rset.getInt("Population");
@@ -110,14 +109,16 @@ public class App {
         }
         catch (Exception e)
         {
+            //Error message to be sent to output if no population details are found
             System.out.println(e.getMessage());
             System.out.println("Failed to get population details");
             return null;
         }
+
     }
     /**
-     * Prints a list of employees.
-     * @param country The list of employees to print.
+     * Prints a list of countries.
+     * @param country The list of countries to print.
      */
     public void printPopulations(ArrayList<Country> country)
     {
