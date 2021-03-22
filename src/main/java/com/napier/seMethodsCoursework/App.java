@@ -11,8 +11,8 @@ public class App {
 
         // Connect to database
         a.connect();
-        // Get Employee
-        // Extract employee salary information
+        // Get Country
+        // Extract Country information
         ArrayList<Country> country = a.getpoplargetosmall();
         // Display results
         a.printPopulations(country);
@@ -84,6 +84,7 @@ public class App {
             }
         }
     }
+
     public ArrayList<Country> getpoplargetosmall()
     {
         try
