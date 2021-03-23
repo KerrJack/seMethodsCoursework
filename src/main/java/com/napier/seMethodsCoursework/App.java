@@ -14,8 +14,10 @@ public class App {
         // Get Employee
         // Extract employee salary information
         ArrayList<Country> country = a.getpoplargetosmall();
+        ArrayList<Country> reportTwo = a.getReportTwo();
         // Display results
         a.printPopulations(country);
+        a.printPopulations(reportTwo);
 
         // Disconnect from database
         a.disconnect();
@@ -93,6 +95,43 @@ public class App {
             // Create string for SQL statement
             String strSelect =
                     "SELECT Code, Name, Continent, Region, Population, Capital FROM country ORDER BY Population DESC";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Extract country information
+            ArrayList<Country> country = new ArrayList<Country>();
+            while (rset.next())
+            {
+                Country cntry = new Country();
+                cntry.Code = rset.getString("Code");
+                cntry.Name = rset.getString("Name");
+                cntry.Continent = rset.getString("Continent");
+                cntry.Region = rset.getString("Region");
+                cntry.Capital = rset.getInt("Capital");
+                cntry.Population = rset.getInt("Population");
+
+                country.add(cntry);
+
+            }
+            return country;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details");
+            return null;
+        }
+    }
+
+    public ArrayList<Country> getReportTwo()
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Code, Name, Continent, Region, Population, Capital FROM country WHERE Continent='Asia' ORDER BY Population DESC";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
