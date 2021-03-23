@@ -92,7 +92,7 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT Name, population FROM country ORDER BY population DESC";
+                    "SELECT Code, Name, Continent, Region, Population, Capital FROM country ORDER BY Population DESC";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -101,8 +101,13 @@ public class App {
             while (rset.next())
             {
                 Country cntry = new Country();
+                cntry.Code = rset.getString("Code");
                 cntry.Name = rset.getString("Name");
-                cntry.Population = rset.getInt("population");
+                cntry.Continent = rset.getString("Continent");
+                cntry.Region = rset.getString("Region");
+                cntry.Capital = rset.getInt("Capital");
+                cntry.Population = rset.getInt("Population");
+
                 country.add(cntry);
 
             }
@@ -121,13 +126,22 @@ public class App {
      */
     public void printPopulations(ArrayList<Country> country)
     {
+
+        // Check country is not null
+        if (country == null)
+        {
+            System.out.println("No countries");
+            return;
+        }
         // Print header
-        System.out.println(String.format("%-45s %-15s", "Name", "population"));
+        System.out.println(String.format("%-10s %-45s %-15s %-26s %-15s %-15s", "Code","Name", "Continent", "Region","Population", "Capital"));
         // Loop over all countries in the list
         for (Country cntry : country)
         {
+            if (cntry == null)
+                continue;
             String cntry_string =
-                    String.format("%-45s %-15s", cntry.Name, cntry.Population);
+                    String.format("%-10s %-45s %-15s %-26s %-15s %-15s", cntry.Code, cntry.Name, cntry.Continent, cntry.Region, cntry.Population, cntry.Capital );
             System.out.println(cntry_string);
         }
     }
