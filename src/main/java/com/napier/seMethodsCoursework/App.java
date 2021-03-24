@@ -38,9 +38,11 @@ public class App {
         // Extract country information
         ArrayList<Country> country = a.getpoplargetosmall();
         ArrayList<Country> reportTwo = a.getReportTwo();
+        ArrayList<Country> reportThree = a.getReportThree();
         // Display results
         a.printPopulations(country);
         a.printPopulations(reportTwo);
+        a.printPopulations(reportThree);
 
         // Disconnect from database
         a.disconnect();
@@ -165,7 +167,44 @@ public class App {
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract employee information
+            // Extract country information
+            ArrayList<Country> country = new ArrayList<Country>();
+            while (rset.next())
+            {
+                Country cntry = new Country();
+                // Get column names from country table
+                cntry.code = rset.getString("Code");
+                cntry.name = rset.getString("Name");
+                cntry.continent = rset.getString("Continent");
+                cntry.region = rset.getString("Region");
+                cntry.capital = rset.getInt("Capital");
+                cntry.population = rset.getInt("Population");
+
+                country.add(cntry);
+
+            }
+            return country;
+        }
+        catch (Exception e)
+        {
+            // Error message if no information can be gathered
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details");
+            return null;
+        }
+    }
+
+    public ArrayList<Country> getReportThree()
+    {
+        try
+        {
+            Statement stmt = con.createStatement();
+
+            String strSelect =
+                    "SELECT Code, Name, Continent, Region, Population, Capital FROM country WHERE Region='Central Africa' ORDER BY Population DESC";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
             ArrayList<Country> country = new ArrayList<Country>();
             while (rset.next())
             {
