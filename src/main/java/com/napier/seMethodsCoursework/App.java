@@ -9,10 +9,15 @@ public class App {
         // Create new Application
         App a = new App();
 
-        // Connect to database
-        a.connect("localhost:33070");
-        // Get Country
-        // Extract employee salary information
+        if (args.length < 1)
+        {
+            a.connect("localhost:3306");
+        }
+        else
+        {
+            a.connect(args[0]);
+        }
+
         ArrayList<Country> country = a.getpoplargetosmall();
         ArrayList<Country> reportTwo = a.getReportTwo();
         // Display results
