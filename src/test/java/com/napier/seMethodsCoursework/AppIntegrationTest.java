@@ -16,7 +16,7 @@ public class AppIntegrationTest
     static void init()
     {
         app = new App();
-        app.connect("localhost:3306");
+        app.connect("localhost:33070");
     }
 
     @Test
@@ -24,12 +24,12 @@ public class AppIntegrationTest
     {
         ArrayList<Country> countries = new ArrayList<Country>();
         Country country = new Country();
-        country.Code ="CHN";
-        country.Name ="China";
-        country.Continent ="Asia";
-        country.Region ="Eastern Asia";
-        country.Capital = 1891;
-        country.Population = 1277558000;
+        country.code ="CHN";
+        country.name ="China";
+        country.continent ="Asia";
+        country.region ="Eastern Asia";
+        country.capital = 1891;
+        country.population = 1277558000;
         countries.add(country);
 
         app.printPopulations(countries);

@@ -1,78 +1,56 @@
+/**
+ *
+ * Description: This class contains the variables the represent the items in the table
+ *              when they are extracted from the database.
+ *
+ */
+
 package com.napier.seMethodsCoursework;
 
 public class Country {
-    /**
-     * Country Code
-     */
-    public String Code;
 
-    /**
-     * Country Name
-     */
-    public String Name;
+    //Country Code
+    public String code;
 
-    /**
-     * Continent
-     */
-    public String Continent;
+    //Country Name
+    public String name;
 
-    /**
-     * Region
-     */
-    public String Region;
+    //Continent
+    public String continent;
 
-    /**
-     * Surface Area
-     */
-    public double SurfaceArea;
+    //Region
+    public String region;
 
-    /**
-     * Independence Year
-     */
-    public int IndepYear;
+    //Surface Area
+    public double surfaceArea;
 
-    /**
-     * Population
-     */
-    public int Population;
+    //Independence Year
+    public int indepYear;
 
-    /**
-     * Life Expectancy
-     */
-    public double LifeExpectancy;
+    //Population
+    public int population;
 
-    /**
-     * Gross National Product
-     */
-    public double GNP;
+    //Life Expectancy
+    public double lifeExpectancy;
 
-    /**
-     * Gross National Product old
-     */
-    public double GNPOld;
+    //Gross National Product
+    public double gnpNew;
 
-    /**
-     * Local Name
-     */
-    public String LocalName;
+    //Gross National Product old
+    public double gnpOld;
 
-    /**
-     * Government Form
-     */
-    public String GovernmentForm;
+    //Local Name
+    public String localName;
 
-    /**
-     * Head Of State
-     */
-    public String HeadOfState;
+    //Government Form
+    public String governmentForm;
 
-    /**
-     * Capital
-     */
-    public int Capital;
+    //Head Of State
+    public String headOfState;
 
-    /**
-     * Country Code 2
-     */
-    public String Code2;
+    //Capital
+    public int capital;
+
+    //Country Code 2
+    public String code_2;
 }

@@ -1,3 +1,26 @@
+/**
+ *  Date Created: 07/02/2021
+ *  Authors:    Kerr Jack   -   40440876
+ *              Christopher Rhodes  -   40432612
+ *              Rory Owens  -   40439757
+ *  Description: This class is the main app that contains all the methods and the functionality
+ *               of the program. This also contains the code that allows us to connect to the
+ *               database.
+ *
+ * Copyright 2016-2017 SparklingComet @ http://shanerx.org
+ *
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
+ *
+ *            http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
+ */
 package com.napier.seMethodsCoursework;
 
 import java.sql.*;
@@ -11,7 +34,7 @@ public class App {
 
         if (args.length < 1)
         {
-            a.connect("localhost:3306");
+            a.connect("localhost:33070");
         }
         else
         {
@@ -27,14 +50,12 @@ public class App {
         // Disconnect from database
         a.disconnect();
     }
-    /**
-     * Connection to MySQL database.
-     */
+    // Connection to MySQL database.
+
     private Connection con = null;
 
-    /**
-     * Connect to the MySQL database.
-     */
+
+    // Connect to the MySQL database
     public void connect(String location)
     {
         try
@@ -44,10 +65,12 @@ public class App {
         }
         catch (ClassNotFoundException e)
         {
+            // Error message if drive is not loading
             System.out.println("Could not load SQL driver");
             System.exit(-1);
         }
 
+        // Loop that continues to try and make a connection
         int retries = 10;
         for (int i = 0; i < retries; ++i)
         {
@@ -56,7 +79,7 @@ public class App {
             {
                 // Wait a bit for db to start
                 Thread.sleep(30000);
-                // Connect to database
+                // Connect to world database
                 con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
@@ -87,10 +110,12 @@ public class App {
             }
             catch (Exception e)
             {
+                //Error message if connection to database is not made
                 System.out.println("Error closing connection to database");
             }
         }
     }
+    // method for all countries in the world - large to small
     public ArrayList<Country> getpoplargetosmall()
     {
         try
@@ -108,12 +133,13 @@ public class App {
             while (rset.next())
             {
                 Country cntry = new Country();
-                cntry.Code = rset.getString("Code");
-                cntry.Name = rset.getString("Name");
-                cntry.Continent = rset.getString("Continent");
-                cntry.Region = rset.getString("Region");
-                cntry.Capital = rset.getInt("Capital");
-                cntry.Population = rset.getInt("Population");
+                // Get column names from country table
+                cntry.code = rset.getString("Code");
+                cntry.name = rset.getString("Name");
+                cntry.continent = rset.getString("Continent");
+                cntry.region = rset.getString("Region");
+                cntry.capital = rset.getInt("Capital");
+                cntry.population = rset.getInt("Population");
 
                 country.add(cntry);
 
@@ -122,12 +148,13 @@ public class App {
         }
         catch (Exception e)
         {
+            // Error message if no information cant be gathered
             System.out.println(e.getMessage());
             System.out.println("Failed to get population details");
             return null;
         }
     }
-
+    // method for all countries in a continent - large to small
     public ArrayList<Country> getReportTwo()
     {
         try
@@ -140,17 +167,18 @@ public class App {
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Extract employee information
+            // Extract country information
             ArrayList<Country> country = new ArrayList<Country>();
             while (rset.next())
             {
                 Country cntry = new Country();
-                cntry.Code = rset.getString("Code");
-                cntry.Name = rset.getString("Name");
-                cntry.Continent = rset.getString("Continent");
-                cntry.Region = rset.getString("Region");
-                cntry.Capital = rset.getInt("Capital");
-                cntry.Population = rset.getInt("Population");
+                // Get column names from country table
+                cntry.code = rset.getString("Code");
+                cntry.name = rset.getString("Name");
+                cntry.continent = rset.getString("Continent");
+                cntry.region = rset.getString("Region");
+                cntry.capital = rset.getInt("Capital");
+                cntry.population = rset.getInt("Population");
 
                 country.add(cntry);
 
@@ -159,6 +187,7 @@ public class App {
         }
         catch (Exception e)
         {
+            // Error message if no information can be gathered
             System.out.println(e.getMessage());
             System.out.println("Failed to get population details");
             return null;
@@ -166,7 +195,7 @@ public class App {
     }
     /**
      * Prints a list of employees.
-     * @param country The list of employees to print.
+     * @param country The list of countries to print.
      */
     public void printPopulations(ArrayList<Country> country)
     {
@@ -185,7 +214,7 @@ public class App {
             if (cntry == null)
                 continue;
             String cntry_string =
-                    String.format("%-10s %-45s %-15s %-26s %-15s %-15s", cntry.Code, cntry.Name, cntry.Continent, cntry.Region, cntry.Population, cntry.Capital );
+                    String.format("%-10s %-45s %-15s %-26s %-15s %-15s", cntry.code, cntry.name, cntry.continent, cntry.region, cntry.population, cntry.capital );
             System.out.println(cntry_string);
         }
     }
