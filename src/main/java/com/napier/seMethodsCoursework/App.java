@@ -10,7 +10,7 @@ public class App {
         App a = new App();
 
         // Connect to database
-        a.connect("localhost:33060");
+        a.connect("localhost:33070");
         // Get Country
         // Extract employee salary information
         ArrayList<Country> country = a.getpoplargetosmall();
