@@ -1,3 +1,9 @@
+/**
+ * Description: This class contains all the unit tests for the methods in the main App.java
+ *              class.
+ *
+ *
+ */
 package com.napier.seMethodsCoursework;
 
 import org.junit.jupiter.api.BeforeAll;
@@ -15,16 +21,18 @@ public class AppTest {
     @BeforeAll
     static void init()
     {
+        // Creates instance of App
         app = new App();
     }
 
-
+    // This checks what happens when null is passed into printPopulations
     @Test
     void printPopulationTestNull()
     {
         app.printPopulations(null);
     }
 
+    // This tests what happens when countries is empty
     @Test
     void printPopulationTestEmpty()
     {
@@ -32,6 +40,7 @@ public class AppTest {
         app.printPopulations(countries);
     }
 
+    // This tests what happens when you try to print the list with a null value
     @Test
     void printPopulationTestContainsNull()
     {
@@ -40,17 +49,18 @@ public class AppTest {
         app.printPopulations(countries);
     }
 
+    // This is testing for normal conditions with all non-NULL values
     @Test
     void printPopulationTest()
     {
         ArrayList<Country> countries = new ArrayList<Country>();
         Country country = new Country();
-        country.Code ="CHN";
-        country.Name ="China";
-        country.Continent ="Asia";
-        country.Region ="Eastern Asia";
-        country.Capital = 1891;
-        country.Population = 1277558000;
+        country.code ="CHN";
+        country.name ="China";
+        country.continent ="Asia";
+        country.region ="Eastern Asia";
+        country.capital = 1891;
+        country.population = 1277558000;
         countries.add(country);
 
         app.printPopulations(countries);
