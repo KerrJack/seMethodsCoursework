@@ -41,8 +41,10 @@ public class App {
             a.connect(args[0]);
         }
 
+        // Get information and load into ArrayLists
         ArrayList<Country> country = a.getpoplargetosmall();
         ArrayList<Country> reportTwo = a.getReportTwo();
+
         // Display results
         a.printPopulations(country);
         a.printPopulations(reportTwo);
