@@ -33,9 +33,16 @@ public class App {
         // Create new Application
         App a = new App();
 
-        // Connect to database
-        a.connect();
-        // Extract country information
+        if (args.length < 1)
+        {
+            a.connect("localhost:33070");
+        }
+        else
+        {
+            a.connect(args[0]);
+        }
+
+        // Get information and load into ArrayLists
         ArrayList<Country> country = a.getpoplargetosmall();
         ArrayList<Country> reportTwo = a.getReportTwo();
         ArrayList<Country> reportThree = a.getReportThree();
@@ -49,20 +56,18 @@ public class App {
         // Disconnect from database
         a.disconnect();
     }
-
-     // Connection to MySQL database.
+    // Connection to MySQL database.
 
     private Connection con = null;
 
 
     // Connect to the MySQL database
-
-    public void connect()
+    public void connect(String location)
     {
         try
         {
             // Load Database driver
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         }
         catch (ClassNotFoundException e)
         {
@@ -70,6 +75,7 @@ public class App {
             System.out.println("Could not load SQL driver");
             System.exit(-1);
         }
+
         // Loop that continues to try and make a connection
         int retries = 10;
         for (int i = 0; i < retries; ++i)
@@ -80,7 +86,7 @@ public class App {
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to world database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/world?useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             }
