@@ -55,12 +55,12 @@ public class AppTest {
     {
         ArrayList<Country> countries = new ArrayList<Country>();
         Country country = new Country();
-        country.code ="CHN";
-        country.name ="China";
-        country.continent ="Asia";
-        country.region ="Eastern Asia";
-        country.capital = 1891;
-        country.population = 1277558000;
+        country.setCode("CHN");
+        country.setCountryName("China");
+        country.setCountryContinent("Asia");
+        country.setCountryRegion("Eastern Asia");
+        country.setCountryCapital(1891);
+        country.setCountryPopulation(1277558000);
         countries.add(country);
 
         app.printPopulations(countries);

@@ -1,6 +1,6 @@
 /**
  *  Date Created: 07/02/2021
- *  Authors:    Kerr Jack   -   40440876
+ *  Authors:    Kerr Jack   -   40440876 (last updated
  *              Christopher Rhodes  -   40432612
  *              Rory Owens  -   40439757
  *  Description: This class is the main app that contains all the methods and the functionality
@@ -47,11 +47,16 @@ public class App {
         ArrayList<Country> reportTwo = a.getReportTwo();
         ArrayList<Country> reportThree = a.getReportThree();
         ArrayList<Country> reportFour = a.getReportFour();
+        ArrayList<Country> reportFive = a.getReportFive();
+        ArrayList<Country> reportSix = a.getReportSix();
+
         // Display results
         a.printPopulations(country);
         a.printPopulations(reportTwo);
         a.printPopulations(reportThree);
         a.printPopulations(reportFour);
+        a.printPopulations(reportFive);
+        a.printPopulations(reportSix);
 
         // Disconnect from database
         a.disconnect();
@@ -141,12 +146,12 @@ public class App {
             {
                 Country cntry = new Country();
                 // Get column names from country table
-                cntry.code = rset.getString("Code");
-                cntry.name = rset.getString("Name");
-                cntry.continent = rset.getString("Continent");
-                cntry.region = rset.getString("Region");
-                cntry.capital = rset.getInt("Capital");
-                cntry.population = rset.getInt("Population");
+                cntry.setCode(rset.getString("Code"));
+                cntry.setCountryName(rset.getString("Name"));
+                cntry.setCountryContinent(rset.getString("Continent"));
+                cntry.setCountryRegion(rset.getString("Region"));
+                cntry.setCountryCapital(rset.getInt("Capital"));
+                cntry.setCountryPopulation(rset.getInt("Population"));
 
                 country.add(cntry);
 
@@ -181,13 +186,12 @@ public class App {
             {
                 Country cntry = new Country();
                 // Get column names from country table
-                cntry.code = rset.getString("Code");
-                cntry.name = rset.getString("Name");
-                cntry.continent = rset.getString("Continent");
-                cntry.region = rset.getString("Region");
-                cntry.capital = rset.getInt("Capital");
-                cntry.population = rset.getInt("Population");
-
+                cntry.setCode(rset.getString("Code"));
+                cntry.setCountryName(rset.getString("Name"));
+                cntry.setCountryContinent(rset.getString("Continent"));
+                cntry.setCountryRegion(rset.getString("Region"));
+                cntry.setCountryCapital(rset.getInt("Capital"));
+                cntry.setCountryPopulation(rset.getInt("Population"));
                 country.add(cntry);
 
             }
@@ -218,13 +222,12 @@ public class App {
             {
                 Country cntry = new Country();
                 // Get column names from country table
-                cntry.code = rset.getString("Code");
-                cntry.name = rset.getString("Name");
-                cntry.continent = rset.getString("Continent");
-                cntry.region = rset.getString("Region");
-                cntry.capital = rset.getInt("Capital");
-                cntry.population = rset.getInt("Population");
-
+                cntry.setCode(rset.getString("Code"));
+                cntry.setCountryName(rset.getString("Name"));
+                cntry.setCountryContinent(rset.getString("Continent"));
+                cntry.setCountryRegion(rset.getString("Region"));
+                cntry.setCountryCapital(rset.getInt("Capital"));
+                cntry.setCountryPopulation(rset.getInt("Population"));
                 country.add(cntry);
 
             }
@@ -255,12 +258,12 @@ public class App {
             {
                 Country cntry = new Country();
                 // Get column names from country table
-                cntry.code = rset.getString("Code");
-                cntry.name = rset.getString("Name");
-                cntry.continent = rset.getString("Continent");
-                cntry.region = rset.getString("Region");
-                cntry.capital = rset.getInt("Capital");
-                cntry.population = rset.getInt("Population");
+                cntry.setCode(rset.getString("Code"));
+                cntry.setCountryName(rset.getString("Name"));
+                cntry.setCountryContinent(rset.getString("Continent"));
+                cntry.setCountryRegion(rset.getString("Region"));
+                cntry.setCountryCapital(rset.getInt("Capital"));
+                cntry.setCountryPopulation(rset.getInt("Population"));
 
                 country.add(cntry);
 
@@ -275,10 +278,80 @@ public class App {
             return null;
         }
     }
-    /**
-     * Prints a list of countries.
-     * @param country The list of country to print.
-     */
+
+    public ArrayList<Country>getReportFive() {
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect =
+                    "SELECT Code, Name, Continent, Region, Population, Capital FROM country WHERE Continent = 'Asia' ORDER BY Population DESC LIMIT 10";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<Country> country = new ArrayList<Country>();
+
+            while (rset.next()) {
+                Country cntry = new Country();
+                // Get column names from country table
+                cntry.setCode(rset.getString("Code"));
+                cntry.setCountryName(rset.getString("Name"));
+                cntry.setCountryContinent(rset.getString("Continent"));
+                cntry.setCountryRegion(rset.getString("Region"));
+                cntry.setCountryCapital(rset.getInt("Capital"));
+                cntry.setCountryPopulation(rset.getInt("Population"));
+
+                country.add(cntry);
+
+            }
+            return country;
+        } catch (Exception e) {
+            // Error message if no information can be gathered
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details");
+            return null;
+        }
+
+    }
+
+
+    public ArrayList<Country>getReportSix() {
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect =
+                    "SELECT Code, Name, Continent, Region, Population, Capital FROM country WHERE region = 'Southern Europe' ORDER BY Population DESC LIMIT 10";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<Country> country = new ArrayList<Country>();
+
+            while (rset.next()) {
+                Country cntry = new Country();
+                // Get column names from country table
+                cntry.setCode(rset.getString("Code"));
+                cntry.setCountryName(rset.getString("Name"));
+                cntry.setCountryContinent(rset.getString("Continent"));
+                cntry.setCountryRegion(rset.getString("Region"));
+                cntry.setCountryCapital(rset.getInt("Capital"));
+                cntry.setCountryPopulation(rset.getInt("Population"));
+
+                country.add(cntry);
+
+            }
+            return country;
+        } catch (Exception e) {
+            // Error message if no information can be gathered
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details");
+            return null;
+        }
+    }
+
+
+            /**
+             * Prints a list of countries.
+             * @param country The list of country to print.
+             */
     public void printPopulations(ArrayList<Country> country)
     {
 
@@ -296,7 +369,7 @@ public class App {
             if (cntry == null)
                 continue;
             String cntry_string =
-                    String.format("%-10s %-45s %-15s %-26s %-15s %-15s", cntry.code, cntry.name, cntry.continent, cntry.region, cntry.population, cntry.capital );
+                    String.format("%-10s %-45s %-15s %-26s %-15s %-15s", cntry.getCode(), cntry.getCountryName(), cntry.getCountryContinent(), cntry.getCountryRegion(), cntry.getCountryPopulation(), cntry.getCountryCapital() );
             System.out.println(cntry_string);
         }
     }
