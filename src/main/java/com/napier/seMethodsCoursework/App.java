@@ -181,7 +181,7 @@ public class App {
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             // Extract country information
-            ArrayList<Country> country = new ArrayList<Country>();
+            ArrayList<Country> country = new ArrayList<>();
             while (rset.next())
             {
                 Country cntry = new Country();
