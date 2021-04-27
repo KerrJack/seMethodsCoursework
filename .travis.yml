@@ -24,16 +24,30 @@ jobs:
       jdk: oraclejdk11
       script: mvn test -Dtest=com.napier.seMethodsCoursework.AppTest
     - stage: integration tests
-        jdk: oraclejdk11
-        script: mvn test -Dtest=com.napier.seMethodsCoursework.AppIntegrationTest
-    - stage: deploy
+      jdk: oraclejdk11
+      script: mvn test -Dtest=com.napier.seMethodsCoursework.AppIntegrationTest
+    - stage: GitHub Release
       install: skip
       jdk: oraclejdk11
-      script: mvn package -DskipTests=true -Dmaven.javadoc.skip=true
-        - docker-compose up --abort-on-container-exit
+      script:
+        - echo "Deploying to GitHub Releases"
+        - mvn package -DskipTests=true -Dmaven.javadoc.skip=true
+      before_deploy:
+        - git config --local user.name "Kerr Jack"
+        - git config --local user.email "40440876@live.napier.ac.uk"
+        - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y-%m-%d')-$(git log --format=%h -1)}
+        - git tag $TRAVIS_TAG
+      deploy:
+        provider: releases
+        api_key: $GITHUB_OAUTH_TOKEN
+        file: $TRAVIS_BUILD_DIR/target/seMethodsCoursework-0.1.0.2.jar
+        skip_cleanup: true
 
 stages:
   - unit tests
   - integration tests
   - name: deploy
     if: branch = master
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
