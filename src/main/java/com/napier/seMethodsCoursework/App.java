@@ -1,6 +1,6 @@
 /**
  *  Date Created: 07/02/2021
- *  Authors:    Kerr Jack   -   40440876 (last updated
+ *  Authors:    Kerr Jack   -   40440876 (last updated -
  *              Christopher Rhodes  -   40432612
  *              Rory Owens  -   40439757
  *  Description: This class is the main app that contains all the methods and the functionality
@@ -50,6 +50,9 @@ public class App {
         ArrayList<Country> reportFive = a.getReportFive();
         ArrayList<Country> reportSix = a.getReportSix();
 
+        ArrayList<Country_City> reportSeven = a.getReportSeven();
+
+
         // Display results
         a.printPopulations(country);
         a.printPopulations(reportTwo);
@@ -57,6 +60,8 @@ public class App {
         a.printPopulations(reportFour);
         a.printPopulations(reportFive);
         a.printPopulations(reportSix);
+
+        a.printReports(reportSeven);
 
         // Disconnect from database
         a.disconnect();
@@ -346,6 +351,36 @@ public class App {
             return null;
         }
     }
+    public ArrayList<Country_City>getReportSeven() {
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect =
+                    "SELECT city.Name, country.Name, city.district, city.population FROM city, country WHERE city.countrycode = country.code ORDER BY city.population DESC";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<Country_City> country_city = new ArrayList<>();
+
+            while (rset.next()) {
+                Country_City cntry_city = new Country_City();
+                // Get column names from country table
+                cntry_city.setCityName_city(rset.getString("city.Name"));
+                cntry_city.setCountryName_country(rset.getString("country.Name"));
+                cntry_city.setDistrictName_city(rset.getString("city.District"));
+                cntry_city.setCityPopulation_city(rset.getInt("city.Population"));
+
+                country_city.add(cntry_city);
+
+            }
+            return country_city;
+        } catch (Exception e) {
+            // Error message if no information can be gathered
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details");
+            return null;
+        }
+    }
 
 
             /**
@@ -362,6 +397,7 @@ public class App {
             return;
         }
         // Print header
+        System.out.println("\n");
         System.out.println(String.format("%-10s %-45s %-15s %-26s %-15s %-15s", "Code","Name", "Continent", "Region","Population", "Capital"));
         // Loop over all countries in the list
         for (Country cntry : country)
@@ -371,6 +407,29 @@ public class App {
             String cntry_string =
                     String.format("%-10s %-45s %-15s %-26s %-15s %-15s", cntry.getCode(), cntry.getCountryName(), cntry.getCountryContinent(), cntry.getCountryRegion(), cntry.getCountryPopulation(), cntry.getCountryCapital() );
             System.out.println(cntry_string);
+        }
+    }
+
+    public void printReports(ArrayList<Country_City> country_cities)
+    {
+
+        // Checks country is not null
+        if (country_cities == null)
+        {
+            System.out.println("No countries");
+            return;
+        }
+        // Print header
+        System.out.println("\n");
+        System.out.println(String.format("%-45s %-45s %-20s %-15s", "City Name","Country Name", "District", "Population"));
+        // Loop over all countries in the list
+        for (Country_City country_city : country_cities)
+        {
+            if (country_city == null)
+                continue;
+            String cntry_city_string =
+                    String.format("%-45s %-45s %-20s %-15s",  country_city.getCityName_city(), country_city.getCountryName_country(), country_city.getDistrictName_city(), country_city.getCityPopulation_city() );
+            System.out.println(cntry_city_string);
         }
     }
 }

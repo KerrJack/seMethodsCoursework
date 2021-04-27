@@ -22,7 +22,7 @@ public class Country {
 
 
     //Country Name
-    public String countryName;
+    private String countryName;
 
     public String getCountryName() {
         return countryName;
@@ -34,7 +34,7 @@ public class Country {
 
 
     //Continent
-    public String countryContinent;
+    private String countryContinent;
 
     public String getCountryContinent() {
         return countryContinent;
@@ -45,7 +45,7 @@ public class Country {
     }
 
     //Region
-    public String countryRegion;
+    private String countryRegion;
 
     public String getCountryRegion() {
         return countryRegion;
@@ -57,7 +57,7 @@ public class Country {
 
 
     //Surface Area
-    public double surfaceArea;
+    private double surfaceArea;
 
     public double getSurfaceArea() {
         return surfaceArea;
@@ -69,7 +69,7 @@ public class Country {
 
 
     //Independence Year
-    public int indepYear;
+    private int indepYear;
 
     public int getIndepYear() {
         return indepYear;
@@ -81,7 +81,7 @@ public class Country {
 
 
     //Population
-    public int countryPopulation;
+    private int countryPopulation;
 
     public int getCountryPopulation() {
         return countryPopulation;
@@ -93,7 +93,7 @@ public class Country {
 
 
     //Life Expectancy
-    public double lifeExpectancy;
+    private double lifeExpectancy;
 
     public double getLifeExpectancy() {
         return lifeExpectancy;
@@ -105,7 +105,7 @@ public class Country {
 
 
     //Gross National Product
-    public double gnpNew;
+    private double gnpNew;
 
     public double getGnpNew() {
         return gnpNew;
@@ -116,9 +116,9 @@ public class Country {
     }
 
     //Gross National Product old
-    public double gnpOld;
+    private double gnpOld;
 
-     public double getGnpOld() {
+    public double getGnpOld() {
         return gnpOld;
     }
 
@@ -128,7 +128,7 @@ public class Country {
 
 
     //Local Name
-    public String countryLocalName;
+    private String countryLocalName;
 
     public String getCountryLocalName() {
         return countryLocalName;
@@ -140,7 +140,7 @@ public class Country {
 
 
     //Government Form
-    public String governmentForm;
+    private String governmentForm;
 
     public String getGovernmentForm() {
         return governmentForm;
@@ -152,7 +152,7 @@ public class Country {
 
 
     //Head Of State
-    public String headOfState;
+    private String headOfState;
 
     public String getHeadOfState() {
         return headOfState;
@@ -164,7 +164,7 @@ public class Country {
 
 
     //Capital
-    public int countryCapital;
+    private int countryCapital;
 
     public int getCountryCapital() {
         return countryCapital;
@@ -176,7 +176,7 @@ public class Country {
 
 
     //Country Code 2
-    public String code_2;
+    private String code_2;
 
     public String getCode_2() {
         return code_2;
