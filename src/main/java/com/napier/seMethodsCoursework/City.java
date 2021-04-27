@@ -1,6 +1,6 @@
 package com.napier.seMethodsCoursework;
 
-public class Cities {
+public class City {
 
     //initialise getter and setter for cityId
     private int cityId;
