@@ -1,6 +1,5 @@
 /**
- * Description: This class contains all the unit tests for the methods in the main App.java
- *              class.
+ * Description: This class contains all the unit tests.
  *
  *
  */
@@ -64,5 +63,41 @@ public class AppTest {
         countries.add(country);
 
         app.printPopulations(countries);
+    }
+
+    // This checks what happens when null is passed into printReports
+    @Test
+    void printReportsTestNull()
+    {
+        app.printReports(null);
+    }
+
+    @Test
+    void printReportsTestEmpty()
+    {
+        ArrayList<Country_City> country_city = new ArrayList<Country_City>();
+        app.printReports(country_city);
+    }
+
+    @Test
+    void printReportsTestContainsNull()
+    {
+        ArrayList<Country_City> country_city = new ArrayList<Country_City>();
+        country_city.add(null);
+        app.printReports(country_city);
+    }
+    @Test
+    void printReportsTest()
+    {
+        ArrayList<Country_City> country_cities = new ArrayList<Country_City>();
+        Country_City country_city = new Country_City();
+        country_city.setCityName_city("Mumbai (Bombay)");
+        country_city.setCountryName_country("India");
+        country_city.setDistrictName_city("Maharashtra");
+        country_city.setCityPopulation_city(10500000);
+
+        country_cities.add(country_city);
+
+        app.printReports(country_cities);
     }
 }

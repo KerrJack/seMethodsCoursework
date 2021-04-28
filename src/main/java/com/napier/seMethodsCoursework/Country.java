@@ -9,7 +9,7 @@ package com.napier.seMethodsCoursework;
 
 public class Country {
 
-    //Country Code
+    //initialise getter and setter for Country Code
     private String code;
 
     public String getCode() {
@@ -21,7 +21,7 @@ public class Country {
     }
 
 
-    //Country Name
+    //initialise getter and setter for Country Name
     private String countryName;
 
     public String getCountryName() {
@@ -33,7 +33,7 @@ public class Country {
     }
 
 
-    //Continent
+    //initialise getter and setter for Continent
     private String countryContinent;
 
     public String getCountryContinent() {
@@ -44,7 +44,7 @@ public class Country {
         this.countryContinent = countryContinent;
     }
 
-    //Region
+    //initialise getter and setter for Region
     private String countryRegion;
 
     public String getCountryRegion() {
@@ -56,7 +56,7 @@ public class Country {
     }
 
 
-    //Surface Area
+    //initialise getter and setter for Surface Area
     private double surfaceArea;
 
     public double getSurfaceArea() {
@@ -68,7 +68,7 @@ public class Country {
     }
 
 
-    //Independence Year
+    //initialise getter and setter for Independence Year
     private int indepYear;
 
     public int getIndepYear() {
@@ -80,7 +80,7 @@ public class Country {
     }
 
 
-    //Population
+    //initialise getter and setter for Population
     private int countryPopulation;
 
     public int getCountryPopulation() {
@@ -92,7 +92,7 @@ public class Country {
     }
 
 
-    //Life Expectancy
+    //initialise getter and setter for Life Expectancy
     private double lifeExpectancy;
 
     public double getLifeExpectancy() {
@@ -104,7 +104,7 @@ public class Country {
     }
 
 
-    //Gross National Product
+    //initialise getter and setter for Gross National Product New
     private double gnpNew;
 
     public double getGnpNew() {
@@ -115,7 +115,7 @@ public class Country {
         this.gnpNew = gnpNew;
     }
 
-    //Gross National Product old
+    //initialise getter and setter for Gross National Product old
     private double gnpOld;
 
     public double getGnpOld() {
@@ -127,7 +127,7 @@ public class Country {
     }
 
 
-    //Local Name
+    //initialise getter and setter for Local Name
     private String countryLocalName;
 
     public String getCountryLocalName() {
@@ -139,7 +139,7 @@ public class Country {
     }
 
 
-    //Government Form
+    //initialise getter and setter for Government Form
     private String governmentForm;
 
     public String getGovernmentForm() {
@@ -151,7 +151,7 @@ public class Country {
     }
 
 
-    //Head Of State
+    //initialise getter and setter for Head Of State
     private String headOfState;
 
     public String getHeadOfState() {
@@ -163,7 +163,7 @@ public class Country {
     }
 
 
-    //Capital
+    //initialise getter and setter for Capital
     private int countryCapital;
 
     public int getCountryCapital() {
@@ -175,7 +175,7 @@ public class Country {
     }
 
 
-    //Country Code 2
+    //initialise getter and setter for Country Code 2
     private String code_2;
 
     public String getCode_2() {
