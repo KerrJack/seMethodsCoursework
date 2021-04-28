@@ -62,6 +62,7 @@ public class App {
         ArrayList<Country_City> reportFourteen = a.getReportFourteen();
         ArrayList<Country_City> reportFifteen = a.getReportFifteen();
         ArrayList<Country_City> reportSixteen = a.getReportSixteen();
+        ArrayList<Country_City> reportSeventeen = a.getReportSeventeen();
 
         // Display results
         a.printPopulations(country);
@@ -82,6 +83,8 @@ public class App {
         a.printReports(reportFourteen);
         a.printReports(reportFifteen);
         a.printReports(reportSixteen);
+        a.printReports(reportSeventeen);
+
 
         // Disconnect from database
         a.disconnect();
@@ -671,6 +674,38 @@ public class App {
             return null;
         }
     }
+    public ArrayList<Country_City>getReportSeventeen() {
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect =
+                    "SELECT city.Name, country.Name, city.district, city.population FROM city, country WHERE city.ID = country.capital AND country.continent = 'Africa' ORDER BY city.population DESC";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<Country_City> country_city = new ArrayList<>();
+
+            while (rset.next()) {
+                Country_City cntry_city = new Country_City();
+                // Get column names from country table
+                cntry_city.setCityName_city(rset.getString("city.Name"));
+                cntry_city.setCountryName_country(rset.getString("country.Name"));
+                cntry_city.setDistrictName_city(rset.getString("city.District"));
+                cntry_city.setCityPopulation_city(rset.getInt("city.Population"));
+
+                country_city.add(cntry_city);
+
+            }
+            return country_city;
+        } catch (Exception e) {
+            // Error message if no information can be gathered
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details");
+            return null;
+        }
+    }
+
+
 
 
 
