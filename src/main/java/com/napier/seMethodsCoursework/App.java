@@ -50,10 +50,12 @@ public class App {
         ArrayList<Country> reportFive = a.getReportFive();
         ArrayList<Country> reportSix = a.getReportSix();
 
+
         // New ArrayList type Country_City
         ArrayList<Country_City> reportSeven = a.getReportSeven();
         ArrayList<Country_City> reportEight = a.getReportEight();
         ArrayList<Country_City> reportNine = a.getReportNine();
+        ArrayList<Country_City> reportTen = a.getReportTen();
 
         // Display results
         a.printPopulations(country);
@@ -67,6 +69,7 @@ public class App {
         a.printReports(reportSeven);
         a.printReports(reportEight);
         a.printReports(reportNine);
+        a.printReports(reportTen);
 
         // Disconnect from database
         a.disconnect();
@@ -422,6 +425,36 @@ public class App {
 
             String strSelect =
                     "SELECT city.Name, country.Name, city.district, city.population FROM city, country WHERE city.countrycode = country.code AND country.name = 'France' ORDER BY city.population DESC";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<Country_City> country_city = new ArrayList<>();
+
+            while (rset.next()) {
+                Country_City cntry_city = new Country_City();
+                // Get column names from country table
+                cntry_city.setCityName_city(rset.getString("city.Name"));
+                cntry_city.setCountryName_country(rset.getString("country.Name"));
+                cntry_city.setDistrictName_city(rset.getString("city.District"));
+                cntry_city.setCityPopulation_city(rset.getInt("city.Population"));
+
+                country_city.add(cntry_city);
+
+            }
+            return country_city;
+        } catch (Exception e) {
+            // Error message if no information can be gathered
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details");
+            return null;
+        }
+    }
+    public ArrayList<Country_City>getReportTen() {
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect =
+                    "SELECT city.Name, country.Name, city.district, city.population FROM city, country WHERE city.countrycode = country.code AND city.district = 'New York' ORDER BY city.population DESC";
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
