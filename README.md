@@ -7,3 +7,5 @@ Software Engineering Methods - Group 12
 - License [![LICENSE](https://img.shields.io/github/license/KerrJack/seMethodsCoursework.svg?style=flat-square)](https://github.com/KerrJack/seMethodsCoursework/blob/master/LICENSE)
 
 - Release [![Releases](https://img.shields.io/github/release/KerrJack/seMethodsCoursework/all.svg?style=flat-square)](https://github.com/KerrJack/seMethodsCoursework/releases)
+
+-Codecov  [![codecov](https://codecov.io/gh/KerrJack/seMethodsCoursework/branch/master/graph/badge.svg?token=VTBFRI9B98)](https://codecov.io/gh/KerrJack/seMethodsCoursework)
