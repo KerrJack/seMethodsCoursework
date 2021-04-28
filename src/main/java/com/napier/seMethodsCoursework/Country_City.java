@@ -2,7 +2,7 @@ package com.napier.seMethodsCoursework;
 
 public class Country_City {
 
-    //Country Code
+    //initialise getter and setter for Country Code
     private String countryCode_country;
 
     public String getCountryCode_country() {
@@ -14,7 +14,7 @@ public class Country_City {
     }
 
 
-    //Country Name
+    //initialise getter and setter for Country Name
     private String countryName_country;
 
     public String getCountryName_country() {
@@ -26,7 +26,7 @@ public class Country_City {
     }
 
 
-    //Continent
+    //initialise getter and setter for Continent
     private String countryContinent_country;
 
     public String getCountryContinent_country() {
@@ -38,7 +38,7 @@ public class Country_City {
     }
 
 
-    //Region
+    //initialise getter and setter for Region
     private String countryRegion_country;
 
     public String getCountryRegion_country() {
@@ -49,7 +49,7 @@ public class Country_City {
         this.countryRegion_country = countryRegion_country;
     }
 
-    //Population
+    //initialise getter and setter for Population
     private int countryPopulation_country;
 
     public int getCountryPopulation_country() {
@@ -60,7 +60,7 @@ public class Country_City {
         this.countryPopulation_country = countryPopulation_country;
     }
 
-    //Capital
+    //initialise getter and setter for Capital
     private int countryCapital_country;
 
     public int getCountryCapital_country() {
@@ -72,7 +72,7 @@ public class Country_City {
     }
 
 
-    //Country Code 2
+    //initialise getter and setter for Country Code 2
     private String code_2_country;
 
     public String getCode_2_country() {

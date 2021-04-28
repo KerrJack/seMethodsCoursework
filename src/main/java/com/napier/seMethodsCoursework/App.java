@@ -1,8 +1,8 @@
 /**
  *  Date Created: 07/02/2021
- *  Authors:    Kerr Jack   -   40440876 (last updated -
- *              Christopher Rhodes  -   40432612
- *              Rory Owens  -   40439757
+ *  Authors:    Kerr Jack   -   40440876 (Last updated - 28/04/2021)
+ *              Christopher Rhodes  -   40432612 (Last updated - 03/03/2021)
+ *              Rory Owens  -   40439757 (Last updated - 28/04/2021)
  *  Description: This class is the main app that contains all the methods and the functionality
  *               of the program. This also contains the code that allows us to connect to the
  *               database.
@@ -35,6 +35,7 @@ public class App {
 
         if (args.length < 1)
         {
+            // Connect to database
             a.connect("localhost:33070");
         }
         else
@@ -42,8 +43,8 @@ public class App {
             a.connect(args[0]);
         }
 
-        // Get information and load into ArrayLists
-        ArrayList<Country> country = a.getpoplargetosmall();
+        // Get information and load into ArrayLists type Country
+        ArrayList<Country> reportOne = a.getReportOne();
         ArrayList<Country> reportTwo = a.getReportTwo();
         ArrayList<Country> reportThree = a.getReportThree();
         ArrayList<Country> reportFour = a.getReportFour();
@@ -68,15 +69,15 @@ public class App {
         ArrayList<Country_City> reportTwenty = a.getReportTwenty();
         ArrayList<Country_City> reportTwentyOne = a.getReportTwentyOne();
 
-        // Display results
-        a.printPopulations(country);
+        // Display results for type Country
+        a.printPopulations(reportOne);
         a.printPopulations(reportTwo);
         a.printPopulations(reportThree);
         a.printPopulations(reportFour);
         a.printPopulations(reportFive);
         a.printPopulations(reportSix);
 
-        // print for new ArrayList type
+        // Display results for type Country_City
         a.printReports(reportSeven);
         a.printReports(reportEight);
         a.printReports(reportNine);
@@ -163,8 +164,13 @@ public class App {
         }
     }
 
-    // method for all countries in the world - large to small
-    public ArrayList<Country> getpoplargetosmall()
+    /**
+     * Issue 1 : As a statistician for the government I want to produce a report of all countries
+     * in the world organised by largest population to smallest to assess successful methods for
+     * vaccine rollout.
+     *
+     * **/
+    public ArrayList<Country> getReportOne()
     {
         try
         {
@@ -203,7 +209,11 @@ public class App {
         }
     }
 
-    // method for all countries in a continent - large to small
+    /**
+     * Issue 2 : As a statistician for the government I want to produce a report of all the countries in a
+     * continent organised by largest population to smallest to assess successful methods for vaccine rollout.
+     *
+     * **/
     public ArrayList<Country> getReportTwo()
     {
         try
@@ -242,6 +252,12 @@ public class App {
         }
     }
 
+    /**
+     * Issue 3 : As a statistician for the government I want to produce a report of all the
+     * countries in a region organised by largest population to smallest to assess successful
+     * methods for vaccine rollout
+     *
+     * **/
     public ArrayList<Country> getReportThree()
     {
         try
@@ -278,6 +294,11 @@ public class App {
         }
     }
 
+    /**
+     * Issue 4 : As a statistician for the government I want to produce a report of the top (N)
+     * populated countries in the world where I will give the value to (N)
+     *
+     * **/
     public ArrayList<Country> getReportFour()
     {
         try
@@ -315,6 +336,11 @@ public class App {
         }
     }
 
+    /**
+     * Issue 5 : As a statistician for the government I want to produce a report of the top (N)
+     * populated countries in a continent where I will give the value to (N)
+     *
+     * **/
     public ArrayList<Country>getReportFive() {
         try {
             Statement stmt = con.createStatement();
@@ -350,6 +376,11 @@ public class App {
     }
 
 
+    /**
+     * Issue 6 : As a statistician for the government I want to produce a report of the top (N)
+     * populated countries in a region where I will give the value to (N)
+     *
+     * **/
     public ArrayList<Country>getReportSix() {
         try {
             Statement stmt = con.createStatement();
@@ -382,6 +413,12 @@ public class App {
             return null;
         }
     }
+
+    /**
+     * Issue 7 : As a statistician for the government I want to produce a report of all
+     * the cities in the world organised by largest population to smallest
+     *
+     * **/
     public ArrayList<Country_City>getReportSeven() {
         try {
             Statement stmt = con.createStatement();
@@ -412,6 +449,12 @@ public class App {
             return null;
         }
     }
+
+    /**
+     * Issue 8 : As a statistician for the government  I want to produce a report of all the
+     * cities in a region organised by largest population to smallest
+     *
+     * **/
     public ArrayList<Country_City>getReportEight() {
         try {
             Statement stmt = con.createStatement();
@@ -442,6 +485,12 @@ public class App {
             return null;
         }
     }
+
+    /**
+     * Issue 9 : As a statistician for the government  I want to produce a report of all
+     * the cities in a country organised by largest population to smallest
+     *
+     * **/
     public ArrayList<Country_City>getReportNine() {
         try {
             Statement stmt = con.createStatement();
@@ -472,6 +521,12 @@ public class App {
             return null;
         }
     }
+
+    /**
+     * Issue 10 : As a statistician for the government  I want to produce a report
+     * of all the cities in a district organised by largest population to smallest
+     *
+     * **/
     public ArrayList<Country_City>getReportTen() {
         try {
             Statement stmt = con.createStatement();
@@ -502,6 +557,12 @@ public class App {
             return null;
         }
     }
+
+    /**
+     * Issue 11 : As a statistician for the government  I want to produce a report of the top (N)
+     * populated cities in the world where I will give the value of (N)
+     *
+     * **/
     public ArrayList<Country_City>getReportEleven() {
         try {
             Statement stmt = con.createStatement();
@@ -532,6 +593,12 @@ public class App {
             return null;
         }
     }
+
+    /**
+     * Issue 12 : As a statistician for the government  I want to produce a report of the top (N)
+     * populated cities in a continent where I will give the value of (N)
+     *
+     * **/
     public ArrayList<Country_City>getReportTwelve() {
         try {
             Statement stmt = con.createStatement();
@@ -562,6 +629,12 @@ public class App {
             return null;
         }
     }
+
+    /**
+     * Issue 13 : As a statistician for the government  I want to produce a report of the top (N)
+     * populated cities in a region where I will give the value of (N)
+     *
+     * **/
     public ArrayList<Country_City>getReportThirteen() {
         try {
             Statement stmt = con.createStatement();
@@ -592,6 +665,12 @@ public class App {
             return null;
         }
     }
+
+    /**
+     * Issue 14 : As a statistician for the government  I want to produce a report of the top (N)
+     * populated cities in a country where I will give the value of (N)
+     *
+     * **/
     public ArrayList<Country_City>getReportFourteen() {
         try {
             Statement stmt = con.createStatement();
@@ -622,6 +701,12 @@ public class App {
             return null;
         }
     }
+
+    /**
+     * Issue 15 : As a statistician for the government  I want to produce a report of the top (N)
+     * populated cities in a district where I will give the value of (N)
+     *
+     * **/
     public ArrayList<Country_City>getReportFifteen() {
         try {
             Statement stmt = con.createStatement();
@@ -652,6 +737,12 @@ public class App {
             return null;
         }
     }
+
+    /**
+     * Issue 16 : As a statistician for the government  I want to produce a report of all the
+     * capital cities in the world organised by largest population to smallest
+     *
+     * **/
     public ArrayList<Country_City>getReportSixteen() {
         try {
             Statement stmt = con.createStatement();
@@ -682,6 +773,12 @@ public class App {
             return null;
         }
     }
+
+    /**
+     * Issue 17 : As a statistician for the government  I want to produce a report of all the
+     * capital cities in a continent organised by largest population to smallest
+     *
+     * **/
     public ArrayList<Country_City>getReportSeventeen() {
         try {
             Statement stmt = con.createStatement();
@@ -712,6 +809,12 @@ public class App {
             return null;
         }
     }
+
+    /**
+     * Issue 18 : As a statistician for the government  I want to produce a report of all the
+     * capital cities in a region organised by largest population to smallest
+     *
+     * **/
     public ArrayList<Country_City>getReportEighteen() {
         try {
             Statement stmt = con.createStatement();
@@ -742,6 +845,12 @@ public class App {
             return null;
         }
     }
+
+    /**
+     * Issue 19 : As a statistician for the government  I want to produce a report of the top (N)
+     * populated capital cities in the world where I will provide the value (N)
+     *
+     * **/
     public ArrayList<Country_City>getReportNineteen() {
         try {
             Statement stmt = con.createStatement();
@@ -772,6 +881,12 @@ public class App {
             return null;
         }
     }
+
+    /**
+     * Issue 20 : As a statistician for the government  I want to produce a report of the top (N)
+     * populated capital cities in a continent where I will provide the value (N)
+     *
+     * **/
     public ArrayList<Country_City>getReportTwenty() {
         try {
             Statement stmt = con.createStatement();
@@ -802,6 +917,12 @@ public class App {
             return null;
         }
     }
+
+    /**
+     * Issue 21 : As a statistician for the government  I want to produce a report of the top (N)
+     * populated capital cities in a region where I will provide the value (N)
+     *
+     * **/
     public ArrayList<Country_City>getReportTwentyOne() {
         try {
             Statement stmt = con.createStatement();
@@ -838,9 +959,9 @@ public class App {
 
 
     /**
-             * Prints a list of countries.
-             * @param country The list of country to print.
-             */
+     * Prints reports for countries.
+     * @param country The list which contains the country information to print.
+     */
     public void printPopulations(ArrayList<Country> country)
     {
 
@@ -864,6 +985,10 @@ public class App {
         }
     }
 
+    /**
+     * Prints reports for countries.
+     * @param country_cities The list which contains the country and city information to print.
+     */
     public void printReports(ArrayList<Country_City> country_cities)
     {
 

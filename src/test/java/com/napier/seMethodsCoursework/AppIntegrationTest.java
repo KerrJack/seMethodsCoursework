@@ -35,4 +35,19 @@ public class AppIntegrationTest
         app.printPopulations(countries);
     }
 
+    @Test
+    void printReportsTest()
+    {
+        ArrayList<Country_City> country_cities = new ArrayList<Country_City>();
+        Country_City country_city = new Country_City();
+        country_city.setCityName_city("Mumbai (Bombay)");
+        country_city.setCountryName_country("India");
+        country_city.setDistrictName_city("Maharashtra");
+        country_city.setCityPopulation_city(10500000);
+
+        country_cities.add(country_city);
+
+        app.printReports(country_cities);
+    }
+
 }
