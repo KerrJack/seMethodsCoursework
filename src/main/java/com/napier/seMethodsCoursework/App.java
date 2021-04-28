@@ -63,6 +63,7 @@ public class App {
         ArrayList<Country_City> reportFifteen = a.getReportFifteen();
         ArrayList<Country_City> reportSixteen = a.getReportSixteen();
         ArrayList<Country_City> reportSeventeen = a.getReportSeventeen();
+        ArrayList<Country_City> reportEighteen = a.getReportEighteen();
 
         // Display results
         a.printPopulations(country);
@@ -84,6 +85,7 @@ public class App {
         a.printReports(reportFifteen);
         a.printReports(reportSixteen);
         a.printReports(reportSeventeen);
+        a.printReports(reportEighteen);
 
 
         // Disconnect from database
@@ -680,6 +682,36 @@ public class App {
 
             String strSelect =
                     "SELECT city.Name, country.Name, city.district, city.population FROM city, country WHERE city.ID = country.capital AND country.continent = 'Africa' ORDER BY city.population DESC";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<Country_City> country_city = new ArrayList<>();
+
+            while (rset.next()) {
+                Country_City cntry_city = new Country_City();
+                // Get column names from country table
+                cntry_city.setCityName_city(rset.getString("city.Name"));
+                cntry_city.setCountryName_country(rset.getString("country.Name"));
+                cntry_city.setDistrictName_city(rset.getString("city.District"));
+                cntry_city.setCityPopulation_city(rset.getInt("city.Population"));
+
+                country_city.add(cntry_city);
+
+            }
+            return country_city;
+        } catch (Exception e) {
+            // Error message if no information can be gathered
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details");
+            return null;
+        }
+    }
+    public ArrayList<Country_City>getReportEighteen() {
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect =
+                    "SELECT city.Name, country.Name, city.district, city.population FROM city, country WHERE city.ID = country.capital AND country.region = 'Middle East' ORDER BY city.population DESC";
 
             ResultSet rset = stmt.executeQuery(strSelect);
 
