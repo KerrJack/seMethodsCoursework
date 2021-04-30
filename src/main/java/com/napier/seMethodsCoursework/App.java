@@ -83,6 +83,9 @@ public class App {
         //New ArrayList type Region_Population
         ArrayList<Country_Population> reportTwentyFour = a.getReportTwentyFour();
 
+        //New ArrayList type Region_Population
+        ArrayList<World_Population> reportTwentyFive = a.getReportTwentyFive();
+
         // Display results for type Country
         a.printPopulations(reportOne);
         a.printPopulations(reportTwo);
@@ -116,6 +119,9 @@ public class App {
 
         // Display results for type Country_Population
         a.printPopulationReportsCountry(reportTwentyFour);
+
+        // Display results for type World_Population
+        a.printPopulationReportsWorld(reportTwentyFive);
 
 
         // Disconnect from database
@@ -1118,6 +1124,46 @@ public class App {
         }
     }
 
+    /**
+     * Issue 25 : As a statistician for the government I want to produce a report of population of the world
+     *
+     * **/
+    public ArrayList<World_Population>getReportTwentyFive() {
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect =
+                    "SELECT (select SUM(population) from country) AS Total_population, SUM(population) AS city_population,\n" +
+                            " ROUND((SUM(population)/(select SUM(population) from country) * 100),0) AS percentage_in_cities, \n" +
+                            " ((select SUM(population) from country) - SUM(population)) AS Not_in_cities_population, \n" +
+                            " ROUND((((select SUM(population) from country) - SUM(population))/(select SUM(population) from country) * 100),0) AS Not_in_cities_percentage \n" +
+                            "FROM city;";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<World_Population> world_populations = new ArrayList<>();
+
+            while (rset.next()) {
+                World_Population world_population = new World_Population();
+                // Get column names from country table
+                world_population.setTotalPopulation_world(rset.getLong("Total_population"));
+                world_population.setTotalCityPopulation_world(rset.getLong("city_population"));
+                world_population.setCityPopulationPercentage_world(rset.getLong("percentage_in_cities"));
+                world_population.setNotInCityPopulation_world(rset.getLong("Not_in_cities_population"));
+                world_population.setNotInCityPopulationPercentage_world(rset.getLong("Not_in_cities_percentage"));
+
+                world_populations.add(world_population);
+
+            }
+            return world_populations;
+        } catch (Exception e) {
+            // Error message if no information can be gathered
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details");
+            return null;
+        }
+    }
+
 
 
 
@@ -1242,6 +1288,29 @@ public class App {
             String cntry_pop_string =
                     String.format("%-30s %-20s %-20s %-35s %-25s %-30s", country_population.getCountry_country(), country_population.getTotalPopulation_country(), country_population.getTotalCityPopulation_country(), country_population.getCityPopulationPercentage_country(), country_population.getNotInCityPopulation_country(), country_population.getNotInCityPopulationPercentage_country() );
             System.out.println(cntry_pop_string);
+        }
+    }
+
+    public void printPopulationReportsWorld(ArrayList<World_Population> world_populations)
+    {
+
+        // Checks country is not null
+        if (world_populations == null)
+        {
+            System.out.println("No results");
+            return;
+        }
+        // Print header
+        System.out.println("\n");
+        System.out.println(String.format("%-20s %-20s %-35s %-25s %-30s", "Total Population", "City Population", "Percentage of people in cities","Out Of City Population", "Percentage of people not in cities" ));
+        // Loop over all countries in the list
+        for (World_Population world_population : world_populations)
+        {
+            if (world_population == null)
+                continue;
+            String world_pop_string =
+                    String.format("%-20s %-20s %-35s %-25s %-30s", world_population.getTotalPopulation_world(), world_population.getTotalCityPopulation_world(), world_population.getCityPopulationPercentage_world(), world_population.getNotInCityPopulation_world(), world_population.getNotInCityPopulationPercentage_world() );
+            System.out.println(world_pop_string);
         }
     }
 }
