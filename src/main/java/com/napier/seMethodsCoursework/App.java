@@ -77,6 +77,9 @@ public class App {
         // New ArrayList type Continent_Population
         ArrayList<Continent_Population> reportTwentyTwo = a.getReportTwentyTwo();
 
+        //New ArrayList type Region_Population
+        ArrayList<Region_Population> reportTwentyThree = a.getReportTwentyThree();
+
         // Display results for type Country
         a.printPopulations(reportOne);
         a.printPopulations(reportTwo);
@@ -104,6 +107,9 @@ public class App {
 
         // Display results for type Continent_Population
         a.printPopulationReportsContinent(reportTwentyTwo);
+
+        // Display results for type Continent_Population
+        a.printPopulationReportsRegion(reportTwentyThree);
 
 
         // Disconnect from database
@@ -1011,6 +1017,52 @@ public class App {
         }
     }
 
+    /**
+     * Issue 22 : As a statistician for the government  I want to produce a report of the population of people,
+     * people living in cities and people not living in cities in each region
+     *
+     * **/
+    public ArrayList<Region_Population>getReportTwentyThree() {
+        try {
+            Statement stmt = con.createStatement();
+
+            String strSelect =
+                    "select query1.Region, query1.population_of_people, query2.people_living_in_cities, ROUND(((query2.people_living_in_cities/query1.population_of_people) * 100),0) AS percentage_in_cities,(query1.population_of_people - query2.people_living_in_cities) as people_not_living_in_cities, ROUND((((query1.population_of_people - query2.people_living_in_cities)/query1.population_of_people)* 100),0) AS percentage_not_in_cities from\n" +
+                            "(select country.Region, SUM(country.Population) as population_of_people\n" +
+                            "from country\n" +
+                            "group by country.Region) as query1\n" +
+                            "inner join \n" +
+                            "(select country.Region, SUM(city.Population) as people_living_in_cities\n" +
+                            "from country\n" +
+                            "inner join city on country.Code = city.CountryCode\n" +
+                            "group by country.Region) as query2 on query2.Region = query1.Region\n";
+
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            ArrayList<Region_Population> region_populations = new ArrayList<>();
+
+            while (rset.next()) {
+                Region_Population region_population = new Region_Population();
+                // Get column names from country table
+                region_population.setCountryRegion_Region(rset.getString("Region"));
+                region_population.setTotalPopulation_Region(rset.getLong("population_of_people"));
+                region_population.setTotalCityPopulation_Region(rset.getLong("people_living_in_cities"));
+                region_population.setCityPopulationPercentage_Region(rset.getLong("percentage_in_cities"));
+                region_population.setNotInCityPopulation_Region(rset.getLong("people_not_living_in_cities"));
+                region_population.setNotInCityPopulationPercentage_Region(rset.getLong("percentage_not_in_cities"));
+
+                region_populations.add(region_population);
+
+            }
+            return region_populations;
+        } catch (Exception e) {
+            // Error message if no information can be gathered
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get population details");
+            return null;
+        }
+    }
+
 
 
 
@@ -1089,6 +1141,29 @@ public class App {
             String cont_pop_string =
                     String.format("%-20s %-20s %-20s %-35s %-25s %-30s", continent_population.getCountryContinent_continent(), continent_population.getTotalPopulation_continent(), continent_population.getTotalCityPopulation_continent(), continent_population.getCityPopulationPercentage_continent(), continent_population.getNotInCityPopulation_continent(), continent_population.getNotInCityPopulationPercentage_continent() );
             System.out.println(cont_pop_string);
+        }
+    }
+
+    public void printPopulationReportsRegion(ArrayList<Region_Population> region_populations)
+    {
+
+        // Checks country is not null
+        if (region_populations == null)
+        {
+            System.out.println("No countries");
+            return;
+        }
+        // Print header
+        System.out.println("\n");
+        System.out.println(String.format("%-30s %-20s %-20s %-35s %-25s %-30s", "Region","Total Population", "City Population", "Percentage of people in cities","Out Of City Population", "Percentage of people not in cities" ));
+        // Loop over all countries in the list
+        for (Region_Population region_population : region_populations)
+        {
+            if (region_population == null)
+                continue;
+            String reg_pop_string =
+                    String.format("%-30s %-20s %-20s %-35s %-25s %-30s", region_population.getCountryRegion_Region(), region_population.getTotalPopulation_Region(), region_population.getTotalCityPopulation_Region(), region_population.getCityPopulationPercentage_Region(), region_population.getNotInCityPopulation_Region(), region_population.getNotInCityPopulationPercentage_Region() );
+            System.out.println(reg_pop_string);
         }
     }
 }
