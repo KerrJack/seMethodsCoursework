@@ -14,7 +14,7 @@ Software Engineering Methods - Group 12
 
 - Codecov  [![codecov](https://codecov.io/gh/KerrJack/seMethodsCoursework/branch/master/graph/badge.svg?token=VTBFRI9B98)](https://codecov.io/gh/KerrJack/seMethodsCoursework)
 
-
+25 requirements of 32 have been implemented, which is 78%
 
 | ID 	|      Name     	| Met 	| Screenshot 	|
 |----	|:-------------:	|----:	|------------	|
